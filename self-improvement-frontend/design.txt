@@ -1,0 +1,16 @@
+User can:
+    - log water usage
+    - complete and add tasks
+    - read the blog
+    - recieve a summary of all modules on the dashboard
+
+Blogger can:
+    - see list of own posts (in profile page)
+    - see no. of favourites/post
+    - compose posts
+
+Admin can:
+    - see a list of users, bloggers, admins
+    - promote/demote bloggers and admins
+    - view blogger posts and delete them
+    - delete accounts
