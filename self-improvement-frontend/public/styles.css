@@ -1,13 +1,13 @@
 html,
 body {
   height: 100%;
-  background-image: url("background-main.jpg");
+  background-color: #CEE5D0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
-
-body {
-  align-items: center;
+.card{
+  background-color: #F3F0D7;
 }
-
 .form-signin {
   width: 100%;
   max-width: 330px;
@@ -42,7 +42,10 @@ body {
   border-width: 1px 0;
   box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
 }
-
+.task{
+  
+  background-color: #F3F0D7;
+}
 @media (min-width: 992px) {
   .rounded-lg-3 { border-radius: .3rem; }
 }

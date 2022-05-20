@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function Task(props) {
   return (
-    <li className="list-group-item d-flex align-items-center border-0 mb-2 rounded">
+    <li className="list-group-item d-flex align-items-center border-0 mb-2 rounded task">
       <div class="custom-control custom-checkbox">
         <input
           type="checkbox"

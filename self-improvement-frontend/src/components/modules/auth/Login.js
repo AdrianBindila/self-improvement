@@ -1,14 +1,42 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sendLogin } from "../../../api/auth";
 
 function Login() {
   const navigator = useNavigate();
+  const [isAdmin, setAdmin] = useState();
+
+  const [login, setLogin] = useState({
+    username: "",
+    password: "",
+  });
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setLogin((prevLogin) => {
+      return {
+        ...prevLogin,
+        [name]: value,
+      };
+    });
+  }
+
+  function handleSubmit(event) {
+    sendLogin(login);
+    setLogin({
+      username: "",
+      password: "",
+    });
+    event.preventDefault();
+  }
+
   return (
     <div className="form-signin text-center">
-      <form>
+      <form onSubmit={handleSubmit}>
         <img
-          className="mb-4"
-          src="login-register-tree.png"
-          alt=""
+          className="mb-5"
+          style={{ marginTop: "70%" }}
+          src="assets/login-register-tree.png"
           width="72"
           height="57"
         />
@@ -16,19 +44,23 @@ function Login() {
 
         <div className="form-floating">
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="floatingInput"
-            placeholder="name@example.com"
+            name="username"
+            placeholder="Username"
+            value={login.username}
+            onChange={handleChange}
           />
-          <label>Email address</label>
+          <label>Username</label>
         </div>
         <div className="form-floating">
           <input
             type="password"
             className="form-control"
-            id="floatingPassword"
+            name="password"
             placeholder="Password"
+            value={login.password}
+            onChange={handleChange}
           />
           <label>Password</label>
         </div>
@@ -36,9 +68,6 @@ function Login() {
         <button
           className="w-100 btn btn-lg btn-primary"
           type="submit"
-          onClick={() => {
-            navigator("/dashboard");
-          }}
         >
           Sign in
         </button>

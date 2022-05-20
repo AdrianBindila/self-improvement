@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 function LandingPage() {
   const nav = useNavigate();
   return (
-    <div className="row flex-lg-row-reverse justify-content-center align-items-center g-5 py-5 px-lg-5">
+    <div className="row flex-lg-row-reverse justify-content-center my-auto align-items-center g-5 py-5 px-lg-5">
       <div className="col-10 col-sm-8 col-lg-6">
         <img
-          src="cat.png"
+          src="assets/forest.webp"
           className="d-block mx-lg-auto img-fluid"
           alt="Bootstrap Themes"
           width="100%"

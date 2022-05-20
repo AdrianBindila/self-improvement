@@ -4,10 +4,10 @@ function WaterGlass(props) {
       <div className="row">
         {[...Array(8)].map((e, i) => {
           if (i < props.no)
-            return <img src="full-glass.svg" className="col-md-3 p-lg-5" />;
+            return <img src="assets/full-glass.svg" className="col-md-3 p-lg-5" />;
           else
             return <img
-              src="empty-glass.svg"
+              src="assets/empty-glass.svg"
               className="col-md-3 p-lg-5"
             />;
         })}

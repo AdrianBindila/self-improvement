@@ -1,14 +1,51 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { sendRegistration } from "../../../api/auth";
 
 function Register() {
   const navigator = useNavigate();
+  const [register, setRegister] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    username: "",
+    password: "",
+    confirmedPassword: "",
+  });
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setRegister((prevRegister) => {
+      return {
+        ...prevRegister,
+        [name]: value,
+      };
+    });
+  }
+  function handleSubmit(event) {
+    sendRegistration(register);
+    console.log("Add the send registration function");
+    setRegister({
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      phone: "",
+      username: "",
+      password: "",
+      confirmedPassword: "",
+    });
+    navigator("/login");
+    event.preventDefault();
+  }
+
   return (
     <div className="form-signin text-center">
-      <form>
+      <form onSubmit={handleSubmit}>
         <img
-          className="mb-4"
-          src="login-register-tree.png"
-          alt=""
+          className="mb-5"
+          style={{ marginTop: "30%" }}
+          src="assets/login-register-tree.png"
           width="72"
           height="57"
         />
@@ -18,8 +55,10 @@ function Register() {
           <input
             type="text"
             className="form-control"
-            id="fname"
+            name="firstName"
             placeholder="First Name"
+            value={register.firstName}
+            onChange={handleChange}
           />
           <label>First Name</label>
         </div>
@@ -28,8 +67,10 @@ function Register() {
           <input
             type="text"
             className="form-control"
-            id="lname"
+            name="lastName"
             placeholder="Last Name"
+            value={register.lastName}
+            onChange={handleChange}
           />
           <label>Last Name</label>
         </div>
@@ -38,38 +79,60 @@ function Register() {
           <input
             type="text"
             className="form-control"
-            id="address"
+            name="address"
             placeholder="Address"
+            value={register.address}
+            onChange={handleChange}
           />
           <label>Address</label>
         </div>
+
         <div className="form-floating">
           <input
-            type="tel"
+            type="text"
             className="form-control"
-            id="tel"
-            placeholder="Telephone"
+            name="username"
+            placeholder="Username"
+            value={register.username}
+            onChange={handleChange}
           />
-          <label>Phone number</label>
+          <label>Username</label>
         </div>
 
         <div className="form-floating">
           <input
             type="email"
             className="form-control"
-            id="floatingInput"
+            name="email"
             placeholder="name@example.com"
+            value={register.email}
+            onChange={handleChange}
           />
           <label>Email address</label>
         </div>
+
         <div className="form-floating">
           <input
             type="password"
             className="form-control"
-            id="floatingPassword"
+            name="password"
             placeholder="Password"
+            value={register.password}
+            onChange={handleChange}
           />
           <label>Password</label>
+        </div>
+
+        <div className="form-floating">
+          <input
+            type="password"
+            className="form-control"
+            name="confirmedPassword"
+            placeholder="Confirm Password"
+            value={register.confirmedPassword}
+            onChange={handleChange}
+          />
+          <label>Confirm Password</label>
         </div>
 
         <button className="w-100 btn btn-lg btn-primary" type="submit">

@@ -1,3 +1,6 @@
+-register
+-login
+
 User can:
     - log water usage
     - complete and add tasks
