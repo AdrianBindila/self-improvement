@@ -1,8 +1,8 @@
 import { useState } from "react";
 import WaterGlass from "./WaterGlass";
 
-function HydrationCard() {
-  const [no, setNo] = useState(3);
+function HydrationCard(props) {
+  const [no, setNo] = useState(props.hydrationCount);
   if (no > 8) setNo(8);
   if (no < 0) setNo(0);
   return (

@@ -16,6 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Blogger extends User {
-    @OneToMany(mappedBy = "blogger", cascade = CascadeType.ALL)
-    List<BlogPost> blogPosts;
+//    @OneToMany(mappedBy = "blogger", cascade = CascadeType.ALL)
+//    List<BlogPost> blogPosts;
 }

@@ -20,9 +20,9 @@ public class Role {
 
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private List<User> users;
+//    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+//    @ToString.Exclude
+//    private List<User> users;
 
     @Override
     public boolean equals(Object o) {

@@ -1,6 +1,3 @@
--register
--login
-
 User can:
     - log water usage
     - complete and add tasks
@@ -13,7 +10,11 @@ Blogger can:
     - compose posts
 
 Admin can:
-    - see a list of users, bloggers, admins
+    - see a list of users, bloggers, admins and filter it
     - promote/demote bloggers and admins
     - view blogger posts and delete them
     - delete accounts
+
+Done:
+-register
+-login

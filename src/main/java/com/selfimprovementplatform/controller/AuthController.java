@@ -1,31 +1,40 @@
 package com.selfimprovementplatform.controller;
 
+import com.selfimprovementplatform.dtos.RegisterDTO;
+import com.selfimprovementplatform.dtos.UserDTO;
 import com.selfimprovementplatform.model.User;
 import com.selfimprovementplatform.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/auth")
 @Log4j2
 public class AuthController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public ResponseEntity<User> login(@Param("username") String username, @Param("password") String password){
+    @GetMapping("/login")
+    public ResponseEntity<UserDTO> login(@Param("username") String username, @Param("password") String password) {
         log.info("login");
-        return ResponseEntity.ok(userService.login(username, password));
+        ModelMapper modelMapper = new ModelMapper();
+        User user = userService.login(username, password);
+        return ResponseEntity.ok(modelMapper.map(user, UserDTO.class));
     }
-    @PostMapping
-    public void register(@Param("username") String username, @Param("password") String password){
+
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.OK)
+    public void register(@RequestBody RegisterDTO user) {
         log.info("register");
-        userService.register(username, password);
+        ModelMapper modelMapper = new ModelMapper();
+        User newUser = modelMapper.map(user, User.class);
+        userService.register(newUser);
     }
 }

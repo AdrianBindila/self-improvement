@@ -9,6 +9,7 @@ function Register() {
     lastName: "",
     email: "",
     address: "",
+    phone: "",
     username: "",
     password: "",
     confirmedPassword: "",
@@ -86,7 +87,17 @@ function Register() {
           />
           <label>Address</label>
         </div>
-
+        <div className="form-floating">
+          <input
+            type="text"
+            className="form-control"
+            name="phone"
+            placeholder="Phone"
+            value={register.phone}
+            onChange={handleChange}
+          />
+          <label>Phone</label>
+        </div>
         <div className="form-floating">
           <input
             type="text"

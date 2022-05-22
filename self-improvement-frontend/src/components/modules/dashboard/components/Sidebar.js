@@ -1,4 +1,9 @@
+import { useNavigate } from "react-router-dom";
+import { getUsers } from "../../../../api/admin";
+
 function Sidebar() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigator = useNavigate();
   return (
     <div
       className="d-flex flex-column flex-shrink-0 p-3 h-100"
@@ -40,6 +45,31 @@ function Sidebar() {
           >
             Profile
           </a>
+        </li>
+        {user.role === "ADMIN" && (
+          <li>
+            <button
+              onClick={() => {
+                getUsers().then(navigator("/admin"));
+              }}
+              className="nav-link fs-4"
+              style={{ color: "black" }}
+            >
+              Admin
+            </button>
+          </li>
+        )}
+        <li>
+          <button
+            onClick={() => {
+              localStorage.clear();
+              navigator("/");
+            }}
+            className="nav-link fs-4"
+            style={{ color: "black" }}
+          >
+            Logout
+          </button>
         </li>
       </ul>
       <hr />

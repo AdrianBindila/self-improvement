@@ -18,17 +18,21 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = false, unique = true)
-    private String username;
-    @Column(nullable = false)
-    private String password;
-    @Column(nullable = false, unique = true)
-    private String email;
 
     private String firstName;
 
     private String lastName;
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Role role;
+
+    private String email;
+
+    private String address;
+
+    private String phone;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+
+    private String role="USER";
 }

@@ -4,7 +4,6 @@ import { sendLogin } from "../../../api/auth";
 
 function Login() {
   const navigator = useNavigate();
-  const [isAdmin, setAdmin] = useState();
 
   const [login, setLogin] = useState({
     username: "",
@@ -22,7 +21,9 @@ function Login() {
   }
 
   function handleSubmit(event) {
-    sendLogin(login);
+    sendLogin(login).then((isAdmin) => {
+      isAdmin ? navigator("/admin") : navigator("/dashboard");
+    });
     setLogin({
       username: "",
       password: "",
@@ -65,10 +66,7 @@ function Login() {
           <label>Password</label>
         </div>
 
-        <button
-          className="w-100 btn btn-lg btn-primary"
-          type="submit"
-        >
+        <button className="w-100 btn btn-lg btn-primary" type="submit">
           Sign in
         </button>
         <button

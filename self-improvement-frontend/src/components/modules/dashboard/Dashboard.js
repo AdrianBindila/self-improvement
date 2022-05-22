@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import TaskCard from "../tasks/components/TaskCard";
 
 function Dashboard() {
+  const userData=undefined;
   return (
     <div className="row h-100">
       <Sidebar />
@@ -14,7 +15,7 @@ function Dashboard() {
             <TaskCard />
           </div>
           <div className="row">
-            <HydrationCard />
+            <HydrationCard hydrationCount={0}/>
           </div>
           
         </div>
