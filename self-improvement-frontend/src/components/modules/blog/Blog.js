@@ -1,28 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Post from "./components/Post";
+import { getBlogs } from "../../../api/blog";
 
 function Blog() {
-  const posts = [
-    {
-      title: "Hello",
-      author: "funny clown",
-      content: "This is a test to see how I can better display this data",
-    },
-    {
-      title: "Hello 2",
-      author: "funny clown",
-      content:
-        "This is a test to see how I can better display this data This is a test to see how I can better display this data This is a test to see how I can better display this data This is a test to see how I can better display this data This is a test to see how I can better display this data This is a test to see how I can better display this data",
-    },
-  ];
-  const isBlogger = true;
+  const [posts, setPosts] = useState(
+    JSON.parse(localStorage.getItem("blogPosts")) || []
+  );
+  useEffect(() => {
+    getBlogs();
+    setPosts(JSON.parse(localStorage.getItem("blogPosts")) || []);
+  }, []);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isBlogger = user.role === "BLOGGER";
   const navigator = useNavigate();
   return (
     <>
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <p class="navbar-brand">DAILY BLOG</p>
+      <nav className="navbar navbar-default">
+        <div className="container">
+          <div className="navbar-header">
+            <p className="navbar-brand">DAILY BLOG</p>
           </div>
           {isBlogger && (
             <button
@@ -35,7 +32,7 @@ function Blog() {
         </div>
       </nav>
 
-      <div class="container">
+      <div className="container">
         {posts.map((post) => (
           <Post post={post} />
         ))}

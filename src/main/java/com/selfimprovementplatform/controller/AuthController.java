@@ -22,7 +22,7 @@ public class AuthController {
     private UserService userService;
 
     @GetMapping("/login")
-    public ResponseEntity<UserDTO> login(@Param("username") String username, @Param("password") String password) {
+    public ResponseEntity<? extends UserDTO> login(@Param("username") String username, @Param("password") String password) {
         log.info("login");
         ModelMapper modelMapper = new ModelMapper();
         User user = userService.login(username, password);

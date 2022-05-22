@@ -18,7 +18,16 @@ public class Task {
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private String name;
+    private String text;
     @Column(nullable = false)
-    private boolean completed;
+    private boolean isChecked;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public Task(String text, User user) {
+        this.text = text;
+        this.user = user;
+        this.isChecked = false;
+    }
 }

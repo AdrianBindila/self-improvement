@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { getUsers } from "../../../../api/admin";
-
+import { getBlogs } from "../../../../api/blog";
+import { getTasks } from "../../../../api/task";
+import { getHydration } from "../../../../api/hydration";
 function Sidebar() {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigator = useNavigate();
@@ -19,23 +21,38 @@ function Sidebar() {
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li>
-          <a href="/blog" className="nav-link fs-4" style={{ color: "black" }}>
+          <button
+            onClick={() => {
+              getBlogs().then(navigator("/blog"));
+            }}
+            className="nav-link fs-4"
+            style={{ color: "black" }}
+          >
             Blog
-          </a>
+          </button>
         </li>
         <li>
-          <a href="/tasks" className="nav-link fs-4" style={{ color: "black" }}>
+          <button
+            onClick={() => {
+              const user = JSON.parse(localStorage.getItem("user"));
+              getTasks(user.id).then(navigator("/tasks"));
+            }}
+            className="nav-link fs-4"
+            style={{ color: "black" }}
+          >
             Tasks
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="/hydration"
+          <button
+            onClick={() => {
+              getHydration().then(navigator("/hydration"));
+            }}
             className="nav-link fs-4"
             style={{ color: "black" }}
           >
             Hydration
-          </a>
+          </button>
         </li>
         <li>
           <a

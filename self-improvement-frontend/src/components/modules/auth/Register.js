@@ -25,7 +25,6 @@ function Register() {
   }
   function handleSubmit(event) {
     sendRegistration(register);
-    console.log("Add the send registration function");
     setRegister({
       firstName: "",
       lastName: "",

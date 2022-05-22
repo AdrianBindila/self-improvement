@@ -1,17 +1,32 @@
-import { useState } from "react";
-import { deleteUser } from "../../../api/admin";
+import { useEffect, useState } from "react";
+import { deleteUser, getUsers, setRole } from "../../../api/admin";
 
 function AdminPanel() {
   const [users, setUsers] = useState(
     JSON.parse(localStorage.getItem("userList")) || []
   );
-  function deleteItem(id) {
+  useEffect(() => {
+    getUsers();
+    setUsers(JSON.parse(localStorage.getItem("userList")) || []);
+  }, []);
+  function deleteItem(id, listid) {
     setUsers((prev) => {
       return prev.filter((current, index) => {
-        return index !== id;
+        return index !== listid;
       });
     });
     deleteUser(id);
+  }
+  function changeRole(id,role){
+    setUsers((prev) => {
+      return prev.map((current, index) => {
+        if (current.id === id) {
+          current.role = role;
+          setRole(id,role);
+        }
+        return current;
+      });
+    });
   }
   return (
     <div className="w-50 mx-auto">
@@ -27,36 +42,42 @@ function AdminPanel() {
         <tbody>
           {users.map((user, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <th>{user.username}</th>
                 <th>{user.email}</th>
                 <th>{user.role}</th>
-                <th>
-                  <button
-                    className="btn btn-primary mx-2"
-                    disabled={user.role === "BLOGGER"}
-                  >
-                    Promote
-                  </button>
-                </th>
-                <th>
-                  <button
-                    className="btn btn-warning mx-2"
-                    disabled={user.role === "USER"}
-                  >
-                    Demote
-                  </button>
-                </th>
-                <th>
-                  <button
-                    className="btn btn-danger mx-2"
-                    onClick={() => {
-                      deleteItem(index);
-                    }}
-                  >
-                    Delete
-                  </button>
-                </th>
+                {user.role !== "ADMIN" && (
+                  <>
+                    <th>
+                      <button
+                        className="btn btn-primary mx-2"
+                        disabled={user.role === "BLOGGER"}
+                        onClick={() => changeRole(user.id, "BLOGGER")}
+                      >
+                        Promote
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="btn btn-warning mx-2"
+                        disabled={user.role === "USER"}
+                        onClick={() => changeRole(user.id, "USER")}
+                      >
+                        Demote
+                      </button>
+                    </th>
+                    <th>
+                      <button
+                        className="btn btn-danger mx-2"
+                        onClick={() => {
+                          deleteItem(user.id, index);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </th>
+                  </>
+                )}
               </tr>
             );
           })}

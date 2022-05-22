@@ -1,4 +1,4 @@
 package com.selfimprovementplatform.dtos;
 
-public class AdminDTO {
+public class AdminDTO extends UserDTO {
 }

@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "blogposts")
@@ -19,10 +16,12 @@ import javax.persistence.Table;
 public class BlogPost {
     @Id
     @GeneratedValue
-    private String id;
+    private Long id;
 
     private String title;
     private String content;
     private String author;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="blogger_id")
+    private Blogger blogger;
 }

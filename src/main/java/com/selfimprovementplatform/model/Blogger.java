@@ -14,8 +14,12 @@ import java.util.List;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
+@PrimaryKeyJoinColumn(name = "id")
 public class Blogger extends User {
-//    @OneToMany(mappedBy = "blogger", cascade = CascadeType.ALL)
-//    List<BlogPost> blogPosts;
+    public Blogger(User user) {
+        super(user);
+    }
+    @OneToMany(mappedBy = "blogger", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<BlogPost> blogPosts;
 }
