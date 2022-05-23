@@ -5,11 +5,16 @@ import com.selfimprovementplatform.model.User;
 import com.selfimprovementplatform.repository.BloggerRepository;
 import com.selfimprovementplatform.repository.UserRepository;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type User service.
+ */
 @Service
 @Log4j2
 public class UserServiceImpl implements UserService {
@@ -21,7 +26,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username).orElseThrow();
-        if (user.getPassword().equals(password)) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        if (passwordEncoder.matches(password, user.getPassword())) {
             return user;
         } else {
             log.error("Wrong password");
@@ -31,6 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(User user) {
+        user.setPassword(new BCryptPasswordEncoder(10).encode(user.getPassword()));
         userRepository.save(user);
         log.info("User registered: " + user);
     }
@@ -57,4 +64,12 @@ public class UserServiceImpl implements UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public void updateUserHydration(Long id, Integer hydration) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.setHydration(hydration);
+        userRepository.save(user);
+    }
+
 }

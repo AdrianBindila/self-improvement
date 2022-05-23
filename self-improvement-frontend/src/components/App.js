@@ -9,7 +9,6 @@ import Hydration from "./modules/hydration/Hydration";
 
 import Composer from "./modules/blog/components/Composer";
 import Dashboard from "./modules/dashboard/Dashboard";
-import Profile from "./modules/profile/Profile";
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
         <Route path="/blog/compose" element={<Composer />} />
         <Route path="/hydration" element={<Hydration />} />
         <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/profile" element={<Profile/>}/>
       </Routes>
     </BrowserRouter>
   );

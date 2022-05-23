@@ -28,6 +28,8 @@ public class User {
 
     private String phone;
 
+    private int hydration=0;
+
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
@@ -35,7 +37,7 @@ public class User {
 
     private String role="USER";
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Task> tasks;
 
     public User(User user) {

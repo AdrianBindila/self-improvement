@@ -4,8 +4,8 @@ import Task from "./Task";
 
 function TaskList(props) {
  
-  function deleteTask(id) {
-    props.setTasks(props.tasks.filter((task) => task.id !== id));
+  function deleteTask(id,index) {
+    props.setTasks(props.tasks.filter((task,indexItem) => indexItem !== index));
     removeTask(id);
   }
   return (
@@ -15,13 +15,13 @@ function TaskList(props) {
           {props.tasks.map((task, index) => {
             return (
               <div className="row">
-                <div className="col">
-                  <Task key={index} task={task} />
+                <div className="col" >
+                  <Task key={index} task={task}/>
                 </div>
                 <button
                   className="btn btn-danger col-1"
                   onClick={() => {
-                    deleteTask(task.id);
+                    deleteTask(task.id,index);
                   }}
                 >
                   X

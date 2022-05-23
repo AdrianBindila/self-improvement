@@ -43,26 +43,7 @@ function Sidebar() {
             Tasks
           </button>
         </li>
-        <li>
-          <button
-            onClick={() => {
-              getHydration().then(navigator("/hydration"));
-            }}
-            className="nav-link fs-4"
-            style={{ color: "black" }}
-          >
-            Hydration
-          </button>
-        </li>
-        <li>
-          <a
-            href="/profile"
-            className="nav-link fs-4"
-            style={{ color: "black" }}
-          >
-            Profile
-          </a>
-        </li>
+      
         {user.role === "ADMIN" && (
           <li>
             <button

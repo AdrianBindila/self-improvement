@@ -1,24 +1,27 @@
 import { useState } from "react";
+import { updateTask } from "../../../../api/task";
 
 function Task(props) {
+  const [task, setTask] = useState(props.task);
   function handleChange(event) {
     const { name, value } = event.target;
-    props.setTask((prevTask) => {
+    setTask((prevTask) => {
       return {
         ...prevTask,
         [name]: value,
       };
     });
+    updateTask(task.id);
   }
   return (
-    <li className="list-group-item d-flex align-items-center border-0 mb-2 rounded task">
+    <li className="list-group-item d-flex align-items-center border-0 mb-2 rounded task" key={props.task.id}>
       <div className="custom-control custom-checkbox">
         <input
           type="checkbox"
           className="custom-control-input m-2"
-          id="checkbox"
           name="isChecked"
-          onChange={() => {handleChange(props.task.id)}}
+          onChange={handleChange}
+          value={task.isChecked}
         />
         <label className="custom-control-label">{props.task.text}</label>
       </div>

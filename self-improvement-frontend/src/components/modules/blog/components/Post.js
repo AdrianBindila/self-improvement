@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Post(props) {
   const [clicked, setClicked] = useState(false);
-  const [content, setContent] = useState(
-    props.post.content.substring(0, 100) + " ..."
-  );
+  const [content, setContent] = useState(() => {
+    return props.post ? props.post.content.substring(0, 100) + " ..." : "";
+  });
+
   function handleClick() {
     setClicked((prev) => !prev);
     !clicked

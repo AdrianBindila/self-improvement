@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sendLogin } from "../../../api/auth";
+import { getBlogs } from "../../../api/blog";
+import { getHydration } from "../../../api/hydration";
+import { getTasks } from "../../../api/task";
 
 function Login() {
+  
   const navigator = useNavigate();
 
   const [login, setLogin] = useState({
@@ -22,7 +26,9 @@ function Login() {
 
   function handleSubmit(event) {
     sendLogin(login).then((isAdmin) => {
-      isAdmin ? navigator("/admin") : navigator("/dashboard");
+      let user = JSON.parse(localStorage.getItem("user"));
+      getBlogs().then(isAdmin ? navigator("/admin") : navigator("/dashboard"));
+      getTasks(user.id);
     });
     setLogin({
       username: "",
